@@ -10,6 +10,7 @@ package markuslang.machine;
 import markuslang.ast.arguments.NumberArgument;
 import markuslang.ast.arguments.StringArgument;
 import markuslang.ast.statements.AssignmentStatement;
+import markuslang.ast.statements.MemoryTraceStatement;
 import markuslang.ast.statements.PrintStatement;
 
 import java.util.*;
@@ -73,12 +74,12 @@ public class MarkusMachine implements MarkusLangVisitor
   }
 
   /**
-   * Prints the content of the RPN machine’s memory to the system console.
+   * Prints a memory trace of all the values in the memory hashtable
    */
-  public void printMemoryTrace ()
+  public void visit (MemoryTraceStatement aStmt)
   {
     System.out.println("Markus Memory:");
     for (String key : fMemory.keySet ())
-      System.out.println(String.format("%s\t%s", key, fMemory.get (key)));
+      System.out.println(String.format("%s\t%s", key, fMemory.get (key))); 
   }
 }

@@ -18,6 +18,9 @@ Print the value of a *variable* by providing its name to the statement `what is 
 
 For example, `puts x` would translate to `what is this thingy x?`
 
+#### Performing a Memory trace
+You can also print out the current machine memory by using a double `?` in this `what is this thingy` statement, i.e. `what is this thingy??`
+
 ### Commenting
 Use hashes to comment out a line of code.
 

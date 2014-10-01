@@ -96,14 +96,18 @@ Statement Statement ():
     }
     |
     /*
-     * what is this thingy < VARIABLE >?
-     * prints the variable provided
+     * what is this thingy (< VARIABLE > | ?)?
+     * prints the variable provided or memory trace
      */
     lStmtToken = "what is this thingy"
-    lVarToken = < VARIABLE >
+    (lVarToken =  < VARIABLE > | lVarToken = "?")
     "?"
     {
-        return new PrintStatement (lStmtToken, lVarToken);
+        // Not doing a memory trace?
+        if (lVarToken.image != "?")
+            return new PrintStatement (lStmtToken, lVarToken);
+        else
+            return new MemoryTraceStatement (lStmtToken);
     }
 }
 

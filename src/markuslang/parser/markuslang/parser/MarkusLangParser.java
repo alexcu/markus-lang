@@ -9,36 +9,27 @@ import markuslang.ast.arguments.*;
 import markuslang.machine.*;
 
 public class MarkusLangParser implements MarkusLangParserConstants {
-    public static void main(String[] args)
+  public static void main(String[] args)
+  {
+    try
     {
-        try
-        {
-            MarkusLangParser lParser = new MarkusLangParser ( new FileInputStream ( args[0] ) );
+      MarkusLangParser lParser = new MarkusLangParser ( new FileInputStream ( args[0] ) );
+      ArrayList< Statement > lStatements = lParser.Program ();
 
-            ArrayList< Statement > lStatements = lParser.Program ();
+      MarkusMachine lMachine = new MarkusMachine ();
 
-            System.out.println ("MarkusLang Code Accepted:");
-
-            for (Statement stmt : lStatements)
-                System.out.println (stmt);
-
-            System.out.println ("Running program:");
-            MarkusMachine lMachine = new MarkusMachine ();
-
-            for (Statement stmt : lStatements)
-                stmt.accept (lMachine);
-
-            lMachine.printMemoryTrace ();
-        }
-        catch (ParseException e)
-        {
-            System.out.println ("We have a boo-boo: \u005cn " + e.toString());
-        }
-        catch (java.io.FileNotFoundException e)
-        {
-            System.err.println ("We have a boo-boo: \u005cn " + e.toString());
-        }
+      for (Statement stmt : lStatements)
+        stmt.accept (lMachine);
     }
+    catch (ParseException e)
+    {
+      System.out.println ("We have a boo-boo:\u005cn " + e.toString());
+    }
+    catch (java.io.FileNotFoundException e)
+    {
+      System.err.println ("We have a boo-boo:\u005cn " + e.toString());
+    }
+  }
 
 // Program ::= "i am the dictator" 
 //             (Statement)* 
@@ -90,16 +81,31 @@ public class MarkusLangParser implements MarkusLangParserConstants {
       break;
     case 10:
       /*
-           * what is this thingy < VARIABLE >?
-           * prints the variable provided
+           * what is this thingy (< VARIABLE > | ?)?
+           * prints the variable provided or memory trace
            */
           lStmtToken = jj_consume_token(10);
-      lVarToken = jj_consume_token(VARIABLE);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VARIABLE:
+        lVarToken = jj_consume_token(VARIABLE);
+        break;
+      case 11:
+        lVarToken = jj_consume_token(11);
+        break;
+      default:
+        jj_la1[1] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
       jj_consume_token(11);
-        {if (true) return new PrintStatement (lStmtToken, lVarToken);}
+        // Not doing a memory trace?
+        if (lVarToken.image != "?")
+            {if (true) return new PrintStatement (lStmtToken, lVarToken);}
+        else
+            {if (true) return new MemoryTraceStatement (lStmtToken);}
       break;
     default:
-      jj_la1[1] = jj_gen;
+      jj_la1[2] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -121,7 +127,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
         {if (true) return new NumberArgument (lToken);}
       break;
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[3] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -137,13 +143,13 @@ public class MarkusLangParser implements MarkusLangParserConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[3];
+  final private int[] jj_la1 = new int[4];
   static private int[] jj_la1_0;
   static {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x500,0x500,0x6000,};
+      jj_la1_0 = new int[] {0x500,0x1800,0x500,0x6000,};
    }
 
   /** Constructor with InputStream. */
@@ -157,7 +163,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -171,7 +177,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -181,7 +187,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -191,7 +197,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -200,7 +206,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -209,7 +215,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -265,7 +271,7 @@ public class MarkusLangParser implements MarkusLangParserConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

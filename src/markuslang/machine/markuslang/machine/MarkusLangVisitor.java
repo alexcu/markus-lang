@@ -18,6 +18,7 @@ public interface MarkusLangVisitor
   // Statements
   public void visit (AssignmentStatement aStmt);
   public void visit (PrintStatement aStmt);
+  public void visit (MemoryTraceStatement aStmt);
   
   // Arguments
   public String visit (StringArgument aArg);
