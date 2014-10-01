@@ -26,7 +26,7 @@ public class NumberArgument extends AssignableArgument
   {
     super (aVariable);
 
-    fVariableNumber = new Double (fVariableNumber);
+    fVariableNumber = new Double (aVariable.image);
   }
   
   /**
