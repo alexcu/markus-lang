@@ -11,8 +11,8 @@ import markuslang.parser.*;
 import markuslang.machine.MarkusLangVisitor;
 
 /**
- * The assignment statement contains the variable to
- * assign to and the value which it will be assigned
+ * The print statement contains the variable that is to
+ * be printed and prints it to the console
  */
 public class PrintStatement extends Statement
 {
@@ -23,7 +23,7 @@ public class PrintStatement extends Statement
   
   /**
    * Constructor for the print statement
-   * @param aStatement
+   * @param aToken
    *        The token which invoked construction
    * @param aVar
    *        The variable name to print
