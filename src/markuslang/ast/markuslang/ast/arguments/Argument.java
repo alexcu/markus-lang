@@ -1,3 +1,10 @@
+//
+// MarkusLang Parser
+// A basic language made up of Markus Lumpe quotes
+//
+// Alex Cummaudo
+// 1 October 2014
+//
 package markuslang.ast.arguments;
 
 import markuslang.ast.Position;
