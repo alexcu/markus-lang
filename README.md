@@ -40,6 +40,6 @@ everything is peachy
 
 ````
 
-Q.E.D[^1]
+## Disclaimer
 
-[^1]: You probably won't get any of this if you never did [LSD](http://www.future.swinburne.edu.au/units/Languages-in-Software-Development-HIT3315/local) at Swinburne ;)
+You probably won't get any of this if you never did [LSD](http://www.future.swinburne.edu.au/units/Languages-in-Software-Development-HIT3315/local) at Swinburne ;)
