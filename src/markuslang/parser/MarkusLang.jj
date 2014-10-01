@@ -31,26 +31,19 @@ public class MarkusLangParser
     {
       MarkusLangParser lParser = new MarkusLangParser ( new FileInputStream ( args[0] ) );
       ArrayList< Statement > lStatements = lParser.Program ();
-      System.out.println ("MarkusLang Code Accepted:");
             
-      for (Statement stmt : lStatements)
-        System.out.println (stmt);
-            
-      System.out.println ("Running program:"); 
       MarkusMachine lMachine = new MarkusMachine ();
             
       for (Statement stmt : lStatements)
         stmt.accept (lMachine); 
-            
-      lMachine.printMemoryTrace ();
     }
     catch (ParseException e)
     {
-      System.out.println ("We have a boo-boo: \n " + e.toString());
+      System.out.println ("We have a boo-boo:\n " + e.toString());
     }
     catch (java.io.FileNotFoundException e)
     {
-      System.err.println ("We have a boo-boo: \n " + e.toString());
+      System.err.println ("We have a boo-boo:\n " + e.toString());
     }
   }
 }
