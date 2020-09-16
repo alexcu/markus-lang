@@ -1,6 +1,8 @@
 MarkusLang
 ==========
 
+![Deal with it](https://i.imgur.com/KcroNqp.gif)
+
 A basic language made up of Markus Lumpe quotes. More to come soon (hopefully!)
 
 Written using JavaCC.
